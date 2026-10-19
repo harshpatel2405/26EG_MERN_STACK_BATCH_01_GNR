@@ -1,0 +1,79 @@
+Visual Representation -- how does it look...
+work of the entity -- what is that thing doing ...
+
+balanced -- look should be good + work should be good as well 
+
+
+website -- frontend + backend 
+
+
+
+Frontend 
+Backend 
+Database 
+
+Full Stack => frontend + backend + database + (dev ops)
+
+MERN 
+M - Mongo DB --- database
+E - Express JS -- backend -- JS Framework 
+R - React JS   -- frontend -- JS Library 
+N - Node JS    -- Run time Environment 
+
+
+REACT JS 
+--------
+What is React ?
+React is UI library of JS 
+
+UI - User Interface 
+
+DOM 
+---
+
+
+
+node --version
+node js 
+
+React 
+-----
+UI Library developed by Facebook 
+
+Adv 
+---
+1. Virtual DOM 
+-> A lightweight copy of Real DOM 
+-> DOM : Harsh 
+-> Virtual DOM : Harsh Patel 
+DOM : Harsh Patel
+
+
+2. Component based architecture
+--> 1 component can be reused 
+
+Navbar.jsx
+JSX -> JS + HTML 
+
+<Navbar/>
+
+
+3. Uni directional Flow 
+-> single direction -> from parent to child 
+
+create a new folder and open it in vs code 
+
+npm create vite@latest
+project-name : react-learning 
+Framework : React 
+Language : Javascript 
+Linter : EsLint 
+install npm and start now ? -> NO 
+
+cd react-learning 
+npm i / npm install 
+npm run dev 
+
+
+index.html 
+main.jsx 
