@@ -1,0 +1,8 @@
+Map 
+---
+works on original array and returns a new array ..
+
+original array -- 10 data 
+new array      -- 10 data 
+
+new array might have modified data 

@@ -1,7 +1,7 @@
- table {
+/* table {
      width: 100%;
      border-collapse: collapse;
-     /* Prevents double borders */
+     /* Prevents double borders 
      font-family: sans-serif;
  }
 
@@ -12,7 +12,7 @@
      padding: 8px;
  }
 
- /* Gives alternating rows a gray background color */
+ /* Gives alternating rows a gray background color 
  tr:nth-child(even) {
      background-color: #f2f2f2;
  }

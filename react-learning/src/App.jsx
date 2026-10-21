@@ -2,6 +2,8 @@ import React from "react";
 import ComponentDemo1 from "./components/ComponentDemo1";
 import ComponentDemo2 from "./components/ComponentDemo2";
 import ComponentDemo3 from "./components/ComponentDemo3";
+import MapDemo1 from "./components/map/MapDemo1";
+import MapDemo2 from "./components/map/MapDemo2";
 
 
 const App = () => {
@@ -12,7 +14,11 @@ const App = () => {
       {/* <ComponentDemo1 /> */}
 
       {/* <ComponentDemo2></ComponentDemo2> */}
-      <ComponentDemo3/>
+      {/* <ComponentDemo3/> */}
+    
+      {/* <MapDemo1/> */}
+      <MapDemo2/>
+    
     </div>
   );
 };
