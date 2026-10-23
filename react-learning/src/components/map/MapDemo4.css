@@ -1,0 +1,94 @@
+/* Import Google Font - Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+body {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #e3f2fd;
+}
+.container {
+  position: relative;
+  background-image: url("https://www.mastercard.com/brandcenter/us/en/download-artwork/_jcr_content/root/container/container_1578756628/container_copy/container/tabs/item_1734020772487/container_45945280/carousel/item_1739263420780.coreimg.png/1751029718077/maestro-darkpng.png");
+  background-size: cover;
+  padding: 25px;
+  border-radius: 28px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+header,
+.logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.logo img {
+  width: 48px;
+  margin-right: 10px;
+}
+h5 {
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+}
+header .chip {
+  width: 60px;
+}
+h6 {
+  color: #fff;
+  font-size: 10px;
+  font-weight: 400;
+}
+h5.number {
+  margin-top: 4px;
+  font-size: 18px;
+  letter-spacing: 1px;
+}
+h5.name {
+  margin-top: 20px;
+}
+.container .card-details {
+  margin-top: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.parent {
+    width: 70%;
+    margin: 20px auto;
+    padding: 10px;
+    background-color: cadetblue;
+
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.child {
+    width: 200px;
+    margin: 10px;
+    padding: 15px;
+    background-color: rgb(211, 237, 212);
+    border: 1px solid black;
+}
+
+.final {
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin: 20px;
+} */
