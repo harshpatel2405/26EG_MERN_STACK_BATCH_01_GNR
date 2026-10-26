@@ -8,6 +8,7 @@ import MapDemo3 from "./components/map/MapDemo3";
 import MapDemo4 from "./components/map/MapDemo4";
 import MapDemo5 from "./components/map/MapDemo5";
 import MapDemo6 from "./components/map/MapDemo6";
+import CrDemo1 from "./components/Conditional Rendering/CrDemo1";
 
 
 const App = () => {
@@ -25,7 +26,9 @@ const App = () => {
       {/* <MapDemo3/> */}
     {/* <MapDemo4/> */}
     {/* <MapDemo5/> */}
-    <MapDemo6/>
+    {/* <MapDemo6/> */}
+
+    <CrDemo1/>
     </div>
   );
 };
