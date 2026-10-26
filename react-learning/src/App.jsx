@@ -6,6 +6,8 @@ import MapDemo1 from "./components/map/MapDemo1";
 import MapDemo2 from "./components/map/MapDemo2";
 import MapDemo3 from "./components/map/MapDemo3";
 import MapDemo4 from "./components/map/MapDemo4";
+import MapDemo5 from "./components/map/MapDemo5";
+import MapDemo6 from "./components/map/MapDemo6";
 
 
 const App = () => {
@@ -21,7 +23,9 @@ const App = () => {
       {/* <MapDemo1/> */}
       {/* <MapDemo2/> */}
       {/* <MapDemo3/> */}
-    <MapDemo4/>
+    {/* <MapDemo4/> */}
+    {/* <MapDemo5/> */}
+    <MapDemo6/>
     </div>
   );
 };

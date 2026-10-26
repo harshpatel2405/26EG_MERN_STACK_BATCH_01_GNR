@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>React Syllabus — Topic-by-Topic Tracker</title>
+<style>
+:root{--bg:#f4f6fb;--panel:#fff;--ink:#172033;--muted:#667085;--line:#e0e6f0;--blue:#315ee8;--blueSoft:#eaf0ff;--green:#15845b;--amber:#a65d00;--shadow:0 8px 24px rgba(22,34,66,.06)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{background:linear-gradient(125deg,#101b36,#244fc5);color:#fff;padding:28px 0 24px}.wrap{max-width:1320px;margin:auto;padding:0 18px}h1{margin:0;font-size:clamp(1.6rem,3vw,2.25rem)}header p{margin:7px 0 0;color:#dce5ff}.top-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+button,.button{border:0;border-radius:9px;padding:10px 13px;font:inherit;font-weight:700;cursor:pointer}.primary{background:var(--blue);color:white}.light{background:#eef2ff;color:#2445a5}.headerbtn{background:#ffffff1c;color:white;border:1px solid #ffffff55}.danger{background:#fff0f0;color:#9e2424}
+main{padding:22px 0 44px}.overview{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.metric,.panel,.phase-card{background:var(--panel);border:1px solid var(--line);border-radius:15px;box-shadow:var(--shadow)}.metric{padding:15px}.metric-label{font-size:.84rem;color:var(--muted)}.metric-value{font-size:1.75rem;font-weight:850}.track{height:8px;border-radius:99px;background:#e9edf5;overflow:hidden;margin-top:8px}.fill{height:100%;width:0;background:linear-gradient(90deg,#315ee8,#1c9b70);transition:width .2s}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:16px;align-items:start}.panel{padding:17px;margin-bottom:15px}.panel h2{font-size:1.12rem;margin:0 0 12px}.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.filters input{flex:1;min-width:200px}.filters input,.filters select,.field input,.field select,.field textarea{border:1px solid #d5dce8;border-radius:9px;padding:9px 10px;background:#fff;color:var(--ink);font:inherit}.filters select{max-width:100%}.phase-card{overflow:hidden;margin-bottom:14px}.phase-head{display:flex;gap:12px;align-items:center;padding:15px;background:#fbfcff;border-bottom:1px solid var(--line)}.phase-icon{display:grid;place-items:center;flex:0 0 42px;height:42px;border-radius:12px;background:var(--blueSoft);color:#244fc5;font-weight:900}.phase-head h3{margin:0;font-size:1.08rem}.phase-head p{margin:3px 0 0;color:var(--muted);font-size:.88rem}.phase-progress{margin-left:auto;text-align:right;min-width:115px}.phase-progress strong{display:block;font-size:1rem}.phase-progress span{color:var(--muted);font-size:.8rem}.phase-body{padding:12px 14px 15px}.unit{border:1px solid var(--line);border-radius:11px;margin:9px 0;overflow:hidden}.unit-head{display:flex;gap:10px;align-items:flex-start;background:#f8faff;padding:11px 12px}.unit-head input,.topic-row input{width:17px;height:17px;margin-top:3px;accent-color:var(--green);flex-shrink:0}.unit-name{font-weight:800}.unit-sub{font-size:.82rem;color:var(--muted);margin-top:2px}.unit-count{margin-left:auto;white-space:nowrap;font-size:.8rem;color:var(--muted)}.topic-list{padding:4px 12px 9px}.topic-row{display:flex;gap:9px;align-items:flex-start;padding:8px 2px;border-bottom:1px dashed #e7ebf2}.topic-row:last-child{border-bottom:0}.topic-text{flex:1}.topic-name{font-size:.93rem}.topic-row.done .topic-name{text-decoration:line-through;color:#7b8494}.topic-detail{font-size:.82rem;color:var(--muted);margin-top:2px}.topic-tag{font-size:.72rem;border-radius:99px;padding:2px 7px;background:#f0f2f7;color:#536078;white-space:nowrap}.lesson-notes{margin:9px 0 2px;padding-top:9px;border-top:1px solid var(--line)}.lesson-notes label{display:block;font-size:.82rem;font-weight:700;margin-bottom:4px}.lesson-notes textarea{width:100%;min-height:54px;border:1px solid #d5dce8;border-radius:8px;padding:8px;font:inherit;resize:vertical}.field{margin-bottom:11px}.field label{display:block;font-size:.85rem;font-weight:750;margin-bottom:5px}.field input,.field select,.field textarea{width:100%}.field textarea{min-height:95px;resize:vertical}.sticky{position:sticky;top:12px}.muted{color:var(--muted);font-size:.87rem}.small{font-size:.8rem;color:var(--muted)}.btnrow{display:flex;gap:8px;flex-wrap:wrap}.btnrow button{font-size:.84rem;padding:8px 10px}.phase-nav{display:flex;flex-direction:column;gap:6px}.phase-nav button{text-align:left;background:#f7f9fd;color:#26334d;border:1px solid var(--line);font-weight:650}.phase-nav button:hover{background:#eaf0ff}.hidden{display:none!important}.unit.collapsed .topic-list{display:none!important}footer{text-align:center;color:var(--muted);padding:10px 15px 28px;font-size:.82rem}#toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#172033;color:#fff;padding:10px 15px;border-radius:10px;display:none;z-index:10;box-shadow:var(--shadow)}
+@media(max-width:900px){.layout{grid-template-columns:1fr}.sticky{position:static}.overview{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.wrap{padding:0 11px}.panel{padding:12px}.phase-head{padding:11px}.phase-progress{min-width:auto}.phase-progress span{display:none}.unit-count{display:none}.metric{padding:11px}.metric-value{font-size:1.45rem}}
+@media print{header{background:white;color:#111;padding:12px 0}header p{color:#333}.top-actions,.layout aside,.filters,.topic-tag{display:none!important}body{background:#fff}.layout{display:block}.metric,.panel,.phase-card{box-shadow:none;break-inside:avoid}.phase-card{break-inside:auto}.topic-row{break-inside:avoid}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<h1>React Teaching Syllabus & Topic Tracker</h1>
+<p>Phase-wise curriculum with separate progress tracking for every individual topic, subtopic and practical skill.</p>
+<div class="top-actions">
+<button class="headerbtn" id="exportBtn">Export Backup</button><button class="headerbtn" id="importBtn">Import Backup</button><button class="headerbtn" id="printBtn">Print Syllabus</button><button class="headerbtn" id="expandBtn">Expand All</button><button class="headerbtn" id="resetBtn">Reset Topic Progress</button>
+<input type="file" id="importFile" accept="application/json" hidden>
+</div>
+</div></header>
+<main class="wrap">
+<div class="overview">
+<div class="metric"><div class="metric-label">Overall topic completion</div><div class="metric-value" id="percent">0%</div><div class="track"><div class="fill" id="overallFill"></div></div></div>
+<div class="metric"><div class="metric-label">Topics completed</div><div class="metric-value" id="completed">0 / 0</div><div class="small">Each checkbox is tracked separately.</div></div>
+<div class="metric"><div class="metric-label">Topics remaining</div><div class="metric-value" id="remaining">0</div><div class="small">Across all five phases.</div></div>
+<div class="metric"><div class="metric-label">Current phase</div><div class="metric-value" style="font-size:1.15rem" id="currentPhase">Phase 1</div><div class="small" id="currentTitle">React foundations</div></div>
+</div>
+<div class="layout">
+<section class="panel">
+<h2>Phase-wise detailed syllabus</h2>
+<div class="filters">
+<input id="search" type="search" placeholder="Search any topic, keyword or practical…">
+<select id="phaseFilter"><option value="all">All phases</option><option value="1">Phase 1 — Foundations</option><option value="2">Phase 2 — Dynamic UI</option><option value="3">Phase 3 — Hooks & data flow</option><option value="4">Phase 4 — Routing & APIs</option><option value="5">Phase 5 — Professional skills</option></select>
+<select id="statusFilter"><option value="all">All topics</option><option value="todo">Not completed</option><option value="done">Completed</option></select>
+</div>
+<div id="syllabus"></div>
+</section>
+<aside class="sticky">
+<div class="panel"><h2>Course / batch details</h2>
+<div class="field"><label for="batch">Course or batch name</label><input id="batch" placeholder="e.g. React Batch A"></div>
+<div class="field"><label for="teacher">Teacher name (optional)</label><input id="teacher" placeholder="Teacher name"></div>
+<div class="field"><label for="startDate">Start date</label><input id="startDate" type="date"></div>
+<div class="field"><label for="duration">Planned class duration</label><select id="duration"><option>60 minutes</option><option>90 minutes</option><option selected>120 minutes</option><option>150 minutes</option><option>180 minutes</option></select></div>
+<div class="field"><label for="nextFocus">Next teaching focus</label><input id="nextFocus" placeholder="e.g. Props: passing objects"></div>
+<div class="field"><label for="generalNotes">General teaching notes</label><textarea id="generalNotes" placeholder="Batch pace, common doubts, revision plan…"></textarea></div>
+<button class="primary" id="saveDetails" style="width:100%">Save Course Details</button>
+<p class="small">Details and topic progress save automatically in this browser.</p>
+</div>
+<div class="panel"><h2>Quick phase navigation</h2><div class="phase-nav">
+<button data-goto="1">Phase 1 · Foundations</button><button data-goto="2">Phase 2 · Dynamic UI</button><button data-goto="3">Phase 3 · Hooks & data flow</button><button data-goto="4">Phase 4 · Routing & APIs</button><button data-goto="5">Phase 5 · Projects & professional skills</button>
+</div></div>
+<div class="panel"><h2>Suggested class structure</h2><p class="muted">For a 120-minute session</p>
+<div class="small">Revision / recap — <b>10 min</b></div><div class="track"><div class="fill" style="width:8.3%"></div></div>
+<div class="small" style="margin-top:8px">Concept explanation — <b>20 min</b></div><div class="track"><div class="fill" style="width:16.6%"></div></div>
+<div class="small" style="margin-top:8px">Teacher live coding — <b>25 min</b></div><div class="track"><div class="fill" style="width:20.8%"></div></div>
+<div class="small" style="margin-top:8px">Student practice — <b>25 min</b></div><div class="track"><div class="fill" style="width:20.8%"></div></div>
+<div class="small" style="margin-top:8px">Doubts + independent task — <b>15 min</b></div><div class="track"><div class="fill" style="width:12.5%"></div></div>
+<div class="small" style="margin-top:8px">Quiz + homework — <b>5 min</b></div><div class="track"><div class="fill" style="width:4.1%"></div></div>
+</div>
+<div class="panel"><h2>Tracking tip</h2><p class="muted">Tick a topic only after you have taught it or the student can demonstrate it. Use the note area inside each topic to record examples covered, homework, doubts and revision status.</p></div>
+</aside>
+</div>
+</main>
+<footer>Standalone HTML · Works offline · Topic completion and notes are saved in local browser storage · Export backups regularly.</footer>
+<div id="toast" role="status"></div>
+<script>
+const phases=[
+{id:1,title:"React Foundations",subtitle:"Setup → JSX → components → lists → props",units:[
+{name:"1.1 React and development environment",topics:[
+["What is React?","Library for building component-based user interfaces; declarative UI.","Concept"],
+["Why React?","Reusable UI, predictable updates, ecosystem and maintainability.","Concept"],
+["React vs vanilla JavaScript","DOM manipulation vs declarative rendering; when each is suitable.","Concept"],
+["SPA and client-side rendering basics","Single-page application, navigation concept, initial load.","Concept"],
+["Prerequisites check","Variables, functions, arrays, objects, arrow functions, destructuring and map().","Revision"],
+["Install Node.js and verify npm","Use node -v and npm -v; understand Node.js vs npm.","Setup"],
+["Create a Vite React project","npm create vite@latest; choose React and JavaScript; install dependencies.","Practical"],
+["Run and stop the development server","npm run dev; understand local URL and terminal output.","Practical"],
+["Explore the project structure","src, public, package.json, index.html, node_modules and Vite config.","Practical"],
+["Understand package.json scripts","dependencies, devDependencies and scripts.","Concept"],
+["Understand the React entry point","main.jsx, App.jsx and createRoot at a high level.","Concept"],
+["Browser DevTools and console","Console errors, Elements panel and network basics.","Tool"]]},
+{name:"1.2 JSX and expressions",topics:[
+["What JSX is","JavaScript syntax extension used to describe UI.","Concept"],
+["Return one JSX root","Single parent element or Fragment.","Syntax"],
+["JS expressions inside braces","Variables, arithmetic, function calls and expressions in JSX.","Syntax"],
+["Text and attribute rendering","Render dynamic text and attribute values.","Practical"],
+["className instead of class","Applying CSS classes in JSX.","Syntax"],
+["htmlFor instead of for","Associating a label with an input.","Syntax"],
+["Self-closing tags","img, input and other elements in JSX.","Syntax"],
+["Inline styles in JSX","Style object, camelCase property names and dynamic values.","Styling"],
+["Fragments","Use <>...</> to avoid unnecessary wrapper elements.","Syntax"],
+["JSX comments","Write comments correctly inside JSX.","Syntax"],
+["Conditional expressions in JSX","Simple ternary and logical AND examples.","Preview"],
+["Common JSX errors","Missing closing tags, invalid expressions and adjacent elements.","Debugging"]]},
+{name:"1.3 Functional components and files",topics:[
+["What a component is","Reusable UI unit and component naming conventions.","Concept"],
+["Create a functional component","Function returning JSX; PascalCase naming.","Practical"],
+["Render a component","Use a component as a JSX element.","Practical"],
+["Split UI into components","Identify repeated or logically separate UI sections.","Design"],
+["Default export and import","Export one main component and import it elsewhere.","Modules"],
+["Named exports and imports","Export and import multiple named values.","Modules"],
+["Parent and child components","Component composition and nesting.","Concept"],
+["Reusable layout components","Navbar, Header, Sidebar, Footer and PageLayout.","Practice"],
+["Component files and folders","Organize components in a clear src/components structure.","Structure"],
+["Component rules and common mistakes","Capitalization, returning JSX and avoiding nested component definitions.","Debugging"]]},
+{name:"1.4 Rendering arrays with map()",topics:[
+["Review arrays and objects","Access array items and object properties.","Revision"],
+["map() callback and return value","Understand input item, index and returned array.","JavaScript"],
+["Render an array of strings","Convert string arrays into JSX elements.","Practical"],
+["Render an array of objects","Display object properties in cards or rows.","Practical"],
+["Use map() with reusable components","Pass each object as props to a child component.","Practical"],
+["Why React keys are required","Stable identity when list items change.","Concept"],
+["Choose a suitable key","Use unique IDs; avoid array index when list order can change.","Best practice"],
+["Render an empty list","Show a helpful empty-state message.","UI"],
+["Filter before rendering","Use filter() with map() for simple list views.","JavaScript"],
+["Common list rendering errors","Missing key, wrong property and returning undefined.","Debugging"],
+["Practice: product catalogue","Render product name, price, category and image placeholder.","Practice"]]},
+{name:"1.5 Props and reusable components",topics:[
+["What props are","Data passed from parent to child component.","Concept"],
+["Pass string and number props","Configure reusable headings, prices and ratings.","Practical"],
+["Destructure props","Use function parameter destructuring.","Syntax"],
+["Pass arrays and objects as props","Provide structured data to child components.","Practical"],
+["Pass function props","Child invokes a callback supplied by parent.","Concept"],
+["The children prop","Wrap custom content inside a component.","Concept"],
+["Props are read-only","Do not mutate props inside a child component.","Rule"],
+["Default/fallback values","Use sensible defaults and optional chaining when appropriate.","Practice"],
+["Reusable card component","Build StudentCard, ProductCard or CourseCard.","Practice"],
+["Phase 1 checkpoint","Build a static course catalogue from components, props and map().","Assessment"]]}]},
+{id:2,title:"Interactive and Dynamic UI",subtitle:"Conditions → events → state → forms",units:[
+{name:"2.1 Conditional rendering",topics:[
+["if / else before return","Choose UI content using ordinary JavaScript conditions.","JavaScript"],
+["Ternary operator in JSX","Render one of two UI branches.","Syntax"],
+["Logical AND rendering","Render optional content when a condition is true.","Syntax"],
+["Render status badges","Show Active, Inactive, In Stock or Sold Out.","Practice"],
+["Conditional classes","Apply CSS classes based on a condition.","Styling"],
+["Empty, loading and error placeholders","Design useful states for absent content.","UI"],
+["Avoid rendering unwanted values","Understand why false/null are ignored and why some values may appear.","Debugging"],
+["Practice: login status panel","Show signed-in or signed-out content.","Practice"]]},
+{name:"2.2 Events and user interaction",topics:[
+["Event handling in React","Use event props such as onClick and onChange.","Concept"],
+["Pass a function vs call a function","onClick={handleClick} vs accidental immediate invocation.","Common mistake"],
+["Event handler parameters","Pass an ID or value to a handler.","Practical"],
+["Synthetic event basics","Read target value and event properties when needed.","Concept"],
+["onChange for input controls","Read text input, checkbox and select values.","Practical"],
+["onSubmit and preventDefault","Handle form submission without a page reload.","Forms"],
+["Why normal variables do not update UI","Understand rendering and React state motivation.","Concept"],
+["Practice: show/hide panel","Toggle visibility using a simple interaction before introducing state.","Practice"]]},
+{name:"2.3 useState fundamentals",topics:[
+["Why state is needed","Data that changes over time and affects the UI.","Concept"],
+["Import and call useState","State value and setter function.","Syntax"],
+["Initial state values","String, number, boolean, array and object examples.","Practice"],
+["Update state on a click","Build increment, decrement and reset controls.","Practice"],
+["State causes re-render","Connect state updates to displayed UI.","Concept"],
+["Never mutate state directly","Use setter functions and create new values.","Rule"],
+["Toggle boolean state","Show/hide content, dark mode or favorite button.","Practice"],
+["State update and stale values","Understand queued updates and functional updater form.","Concept"],
+["Multiple state variables","Keep unrelated pieces of state separate where useful.","Design"],
+["Practice: interactive profile card","Edit display state and toggle profile details.","Practice"]]},
+{name:"2.4 Updating arrays and objects in state",topics:[
+["Update object state immutably","Use spread syntax to preserve other properties.","Concept"],
+["Update one property in an object","Change a profile name or theme setting.","Practice"],
+["Add an item to an array","Use a new array with spread or suitable array methods.","Practice"],
+["Remove an item from an array","Use filter() to create a new array.","Practice"],
+["Update one item by ID","Use map() to return an updated item.","Practice"],
+["Checkbox and selection state","Track selected IDs or boolean choices.","Practice"],
+["Derived values from state","Calculate totals and counts instead of duplicating state.","Concept"],
+["Practice: task list","Add, complete and delete tasks.","Mini-project"]]},
+{name:"2.5 Forms and validation",topics:[
+["Controlled input","Value is driven by React state.","Concept"],
+["Text, email and password fields","Handle different input types.","Practice"],
+["Textarea and select","Control longer text and dropdown values.","Practice"],
+["Checkbox and radio inputs","Track boolean and selected-option values.","Practice"],
+["Form submission","Collect values and prevent default page reload.","Practice"],
+["Basic required-field validation","Check empty values and show messages.","Validation"],
+["Email and password checks","Introduce simple client-side validation rules.","Validation"],
+["Conditional error messages","Show field-level feedback only when needed.","UI"],
+["Reset form after submission","Clear controlled input state appropriately.","Practice"],
+["Practice: registration form","Create a form with validation and confirmation.","Assessment"]]}]},
+{id:3,title:"Hooks and Component Data Flow",subtitle:"State patterns → effects → refs → shared logic",units:[
+{name:"3.1 State update patterns",topics:[
+["State as a render snapshot","Understand values captured by a particular render.","Concept"],
+["Functional state updater","Use setCount(prev => prev + 1) for updates based on previous state.","Syntax"],
+["Batching basics","Why multiple state updates may be processed together.","Concept"],
+["Update arrays and objects safely","Avoid mutation and preserve unchanged fields.","Revision"],
+["Avoid duplicated derived state","Calculate totals and filtered views from existing state.","Best practice"],
+["Debug state updates","Use React DevTools and clear console logging.","Debugging"]]},
+{name:"3.2 useEffect fundamentals",topics:[
+["What useEffect is for","Synchronize a component with an external system.","Concept"],
+["Effect setup function","Run side-effect logic after rendering.","Syntax"],
+["No dependency array","Understand effect after each committed render.","Concept"],
+["Empty dependency array","Effect setup for a component lifecycle pattern; account for Strict Mode in development.","Concept"],
+["Dependency array with values","Re-run effect when reactive dependencies change.","Concept"],
+["Dependency rules","Include referenced reactive values; understand lint guidance.","Best practice"],
+["Infinite effect loops","Recognize state updates that retrigger effects repeatedly.","Debugging"],
+["Events vs effects","Use event handlers for user-triggered actions and effects for synchronization.","Design"],
+["Practice: document title","Synchronize browser title with a value.","Practice"]]},
+{name:"3.3 Effect cleanup and async work",topics:[
+["Cleanup function","Return cleanup logic from an effect.","Concept"],
+["setInterval and clearInterval","Create and clean up a timer.","Practice"],
+["Event listener cleanup","Add and remove a window listener.","Practice"],
+["Fetch data inside an effect","Handle asynchronous results and component changes.","API"],
+["Race conditions and stale requests","Avoid showing old results when requests change or finish out of order.","Concept"],
+["AbortController concept","Cancel supported fetch requests during cleanup.","Practice"],
+["React Strict Mode behavior","Understand extra development checks and avoid assuming production behavior.","Debugging"]]},
+{name:"3.4 Sharing state and component design",topics:[
+["One source of truth","Keep shared data in the nearest common parent.","Concept"],
+["Lifting state up","Move state from children to a parent component.","Pattern"],
+["Pass callback props","Let children request updates from the parent.","Pattern"],
+["Controlled child components","Parent controls selection or input value.","Pattern"],
+["Component composition","Build UI by combining smaller components.","Design"],
+["Avoid prop drilling when unnecessary","Recognize when simple props remain the clearest option.","Design"],
+["Practice: product selector","Choose a product in one component and show details in another.","Practice"]]},
+{name:"3.5 useRef and reusable hooks",topics:[
+["What useRef stores","Keep a mutable reference between renders.","Concept"],
+["Access a DOM element","Attach ref to an input or button.","Practical"],
+["Focus an input","Use ref.current.focus() in response to an action.","Practice"],
+["useRef vs useState","Know when a value should trigger a render.","Concept"],
+["Rules of Hooks","Call hooks at the top level of React components or custom hooks.","Rule"],
+["Create a custom hook","Extract reusable stateful behavior into a use-prefixed function.","Concept"],
+["Use a custom hook in multiple components","Reuse behavior without sharing the same state instance automatically.","Concept"],
+["Practice: useLocalStorage hook (intro)","Persist a small preference with clear synchronization behavior.","Practice"]]}]},
+{id:4,title:"Routing, APIs and Browser Storage",subtitle:"Multi-page navigation → data fetching → CRUD",units:[
+{name:"4.1 React Router foundations",topics:[
+["Why client-side routing is used","Switch views without a full page reload in an SPA.","Concept"],
+["Install React Router","Add the routing package to the Vite project.","Setup"],
+["BrowserRouter","Set up routing context for the app.","Syntax"],
+["Routes and Route","Map URL paths to page components.","Syntax"],
+["Link component","Navigate without a full browser reload.","Practical"],
+["NavLink","Style active navigation links.","Practical"],
+["Create page components","Separate Home, About, Contact and dashboard pages.","Structure"],
+["Unknown routes / 404","Show a not-found page for unmatched paths.","Practice"]]},
+{name:"4.2 Nested and dynamic routes",topics:[
+["Shared layout route","Place common navigation around page content.","Pattern"],
+["Outlet","Render matched nested route content.","Syntax"],
+["Nested routes","Organize dashboard sections under a parent route.","Practice"],
+["Dynamic route segments","Define a path containing an ID parameter.","Syntax"],
+["useParams","Read route parameters in a page component.","Hook"],
+["useNavigate","Navigate programmatically after an action.","Hook"],
+["Query strings and URLSearchParams","Read simple search or filter parameters.","Browser API"],
+["Practice: product details routing","Click a product and open its ID-based detail page.","Practice"]]},
+{name:"4.3 API and HTTP foundations",topics:[
+["What an API is","Client, server, endpoint, request and response.","Concept"],
+["JSON format","Objects, arrays, strings, numbers and parsing.","Concept"],
+["HTTP methods","GET, POST, PUT, PATCH and DELETE.","Concept"],
+["Status codes","Understand common success and error response categories.","Concept"],
+["Headers and request body","Content-Type and JSON request payloads.","Concept"],
+["Inspect API requests","Use browser Network panel and console.","Tool"],
+["JSONPlaceholder","Explore posts, users, comments and demo endpoints.","Practice"],
+["Demo API limitations","A simulated mutation response may not persist on the server.","Important"]]},
+{name:"4.4 fetch() and effect-based data loading",topics:[
+["fetch() basics","Make a request and receive a Response object.","Syntax"],
+["Response.json()","Parse JSON from a response body.","Syntax"],
+["Check response.ok","fetch does not automatically reject for HTTP error status codes.","Important"],
+["async / await in data loading","Handle promise-based work clearly.","JavaScript"],
+["Loading state","Show progress while a request is pending.","UI"],
+["Error state","Catch network and parsing errors and display useful feedback.","UI"],
+["Empty result state","Handle a successful response with no items.","UI"],
+["Render fetched arrays","Combine fetching, map(), keys and reusable cards.","Practice"],
+["Fetch a single item","Load detail data using a route parameter.","Practice"],
+["Search and filtering","Filter fetched data based on a user query.","Practice"]]},
+{name:"4.5 Axios and CRUD",topics:[
+["Install and import Axios","Use Axios in a Vite React project.","Setup"],
+["Axios GET","Read data from an API.","Practice"],
+["Axios POST","Send a new resource payload.","Practice"],
+["Axios PUT and PATCH","Replace or partially update a resource.","Concept"],
+["Axios DELETE","Send a delete request and update UI appropriately.","Practice"],
+["Create an Axios instance","Configure a baseURL and shared settings.","Setup"],
+["Request and response configuration","Understand headers, params and payloads.","Concept"],
+["Centralized error handling basics","Handle errors without hiding useful information.","Best practice"],
+["Loading and submitting states","Prevent confusing duplicate submissions and show feedback.","UI"],
+["Practice: API CRUD screen","List, create, edit and delete demo posts.","Assessment"]]},
+{name:"4.6 localStorage and persistence",topics:[
+["What localStorage is","Browser storage for small string values.","Concept"],
+["setItem and getItem","Save and read a simple preference.","Syntax"],
+["JSON.stringify and JSON.parse","Persist arrays and objects safely.","Syntax"],
+["Handle missing or invalid stored data","Use fallback defaults and safe parsing.","Best practice"],
+["Persist a theme or preference","Keep a setting after refresh.","Practice"],
+["Persist cart or favorites","Save selected item IDs or cart contents.","Practice"],
+["Storage limitations","Same-origin behavior, synchronous API and no sensitive secrets.","Concept"],
+["Synchronize React state with storage","Choose a clear initialization and update strategy.","Practice"]]}]},
+{id:5,title:"Professional React Skills and Projects",subtitle:"Global state → quality → performance → deployment",units:[
+{name:"5.1 Project structure and maintainability",topics:[
+["Organize src folders","components, pages, hooks, services, assets and utilities.","Structure"],
+["Separate UI and API logic","Keep request code reusable and components readable.","Design"],
+["Reusable component API design","Choose meaningful props and sensible defaults.","Design"],
+["Environment variables in Vite","Understand VITE_ prefixed client-side variables and their visibility.","Concept"],
+["Readable naming and file conventions","Use consistent names for components, hooks and helpers.","Best practice"],
+["Refactor repeated code","Extract duplicated UI or logic only when it improves clarity.","Practice"]]},
+{name:"5.2 Context API",topics:[
+["Problem Context can solve","Share values across component trees without repeated prop passing.","Concept"],
+["createContext","Create a context object.","Syntax"],
+["Provider / value","Supply a value to descendant components using the current React API.","Syntax"],
+["useContext","Read a context value from a component.","Hook"],
+["Context for theme or user display","Create a small global UI preference.","Practice"],
+["Context limitations","Avoid placing every value into global context by default.","Best practice"]]},
+{name:"5.3 Authentication flow and protected UI",topics:[
+["Authentication concepts","Login, logout, session and identity at a high level.","Concept"],
+["Login form UI","Capture credentials and show validation feedback.","Practice"],
+["Auth state in the frontend","Represent signed-in/signed-out UI states.","Concept"],
+["Protected route pattern","Restrict client-side navigation based on current UI auth state.","Practice"],
+["Backend authorization requirement","Explain why frontend checks alone do not secure data.","Security"],
+["Token handling overview","Discuss secure design tradeoffs; never hardcode secrets.","Security"]]},
+{name:"5.4 Debugging and error handling",topics:[
+["Read compiler and runtime errors","Identify file, line and likely cause.","Debugging"],
+["React Developer Tools","Inspect component tree, props and state.","Tool"],
+["Common JSX and key errors","Fix invalid JSX and missing/stable keys.","Debugging"],
+["State mutation bugs","Find accidental mutation and stale UI.","Debugging"],
+["Effect dependency bugs","Investigate loops and stale closures.","Debugging"],
+["Error boundaries concept","Understand UI render error containment and limitations.","Concept"],
+["Practice: debug a broken app","Fix several intentional errors and explain the root cause.","Assessment"]]},
+{name:"5.5 Performance and advanced essentials",topics:[
+["Render and re-render basics","Understand what may cause components to render again.","Concept"],
+["Avoid premature optimization","Measure and simplify before adding memoization.","Best practice"],
+["React.memo","Memoize a component when suitable.","Concept"],
+["useMemo","Cache a calculated value when useful.","Hook"],
+["useCallback","Preserve function identity when useful for optimization.","Hook"],
+["Lazy loading and Suspense basics","Load some component code on demand.","Concept"],
+["List performance basics","Stable keys, filtering and avoiding unnecessary work.","Practice"],
+["Strict Mode in development","Understand development checks and why effects may appear to run again.","Concept"]]},
+{name:"5.6 Testing and deployment",topics:[
+["What component testing checks","Test visible behavior rather than implementation details.","Concept"],
+["Testing tools overview","Know the role of a test runner and React Testing Library.","Tools"],
+["Test a simple component","Check that expected text or interaction appears.","Practice"],
+["Production build","Run npm run build and inspect output.","Practical"],
+["Preview production output","Run the preview script and verify behavior.","Practical"],
+["Deploy a static React app","Deploy to a suitable static hosting provider.","Practical"],
+["Environment and routing deployment checks","Check public configuration and SPA fallback behavior.","Practical"]]},
+{name:"5.7 Guided projects and assessment",topics:[
+["Mini-project 1: Student directory","Components, props, map(), keys and search/filter basics.","Project"],
+["Mini-project 2: To-do manager","State, events, controlled inputs and array updates.","Project"],
+["Mini-project 3: API blog","Routing, fetch/Axios, loading/error states and details page.","Project"],
+["Final project planning","Choose features, sketch pages and split components before coding.","Project"],
+["Final project: product catalogue","Product listing, search/filter and reusable cards.","Project"],
+["Final project: detail and cart","Dynamic routes, cart operations and derived totals.","Project"],
+["Final project: persistence","Persist cart or favorites in localStorage.","Project"],
+["Final project: polish and debugging","Responsive layout, validation, empty states and error handling.","Project"],
+["Student presentation and code walkthrough","Explain component tree, state flow, API and design choices.","Assessment"],
+["Interview revision","JSX, props, state, hooks, keys, routing, effects and API handling.","Assessment"]]}]}
+];
+const KEY="reactTopicTracker.v2";
+let data={checks:{},notes:{},course:{batch:"",teacher:"",startDate:"",duration:"120 minutes",nextFocus:"",generalNotes:""}};
+let expanded=true;
+const $=id=>document.getElementById(id);
+function load(){try{const s=JSON.parse(localStorage.getItem(KEY));if(s)data={...data,...s,course:{...data.course,...(s.course||{})}}}catch(e){}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){toast("Browser storage is full; export a backup.")}updateStats()}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function allTopics(){const a=[];phases.forEach(p=>p.units.forEach((u,ui)=>u.topics.forEach((t,ti)=>a.push({p,u,ui,t,ti,id:`p${p.id}-u${ui}-t${ti}`}))));return a}
+function isDone(id){return !!data.checks[id]}
+function phaseCount(p){let total=0,done=0;p.units.forEach((u,ui)=>u.topics.forEach((t,ti)=>{total++;if(isDone(`p${p.id}-u${ui}-t${ti}`))done++}));return {total,done}}
+function render(){
+ const q=$("search").value.trim().toLowerCase(),phaseFilter=$("phaseFilter").value,status=$("statusFilter").value;let out="";
+ phases.forEach(p=>{
+  if(phaseFilter!=="all"&&phaseFilter!==String(p.id))return;
+  let unitHtml="",visibleTopics=0;
+  p.units.forEach((u,ui)=>{
+   const matches=u.topics.map((t,ti)=>({t,ti,id:`p${p.id}-u${ui}-t${ti}`})).filter(x=>{
+    const txt=[u.name,x.t[0],x.t[1],x.t[2],p.title].join(" ").toLowerCase();
+    return (!q||txt.includes(q))&&(status==="all"||(status==="done"?isDone(x.id):!isDone(x.id)));
+   });
+   if(!matches.length)return;visibleTopics+=matches.length;
+   const unitTotal=u.topics.length,unitDone=u.topics.filter((t,ti)=>isDone(`p${p.id}-u${ui}-t${ti}`)).length;
+   unitHtml+=`<div class="unit"><div class="unit-head"><input type="checkbox" data-unit="${p.id}-${ui}" aria-label="Mark all topics in ${esc(u.name)} complete" ${unitDone===unitTotal?"checked":""}><div style="flex:1"><div class="unit-name">${esc(u.name)}</div><div class="unit-sub">${unitDone}/${unitTotal} topics completed · Check the unit box to mark all its topics</div></div><div class="unit-count">${Math.round(unitDone/unitTotal*100)}%</div></div><div class="topic-list">`;
+   matches.forEach(({t,ti,id})=>{
+    const note=data.notes[id]||"",done=isDone(id);
+    unitHtml+=`<div class="topic-row ${done?"done":""}"><input type="checkbox" data-topic="${id}" aria-label="Complete topic ${esc(t[0])}" ${done?"checked":""}><div class="topic-text"><div class="topic-name">${esc(t[0])}</div><div class="topic-detail">${esc(t[1])}</div><div class="lesson-notes"><label for="note-${id}">Teaching notes / example / homework</label><textarea id="note-${id}" data-note="${id}" placeholder="Record what you taught, student doubts, code example or homework…">${esc(note)}</textarea></div></div><span class="topic-tag">${esc(t[2])}</span></div>`;
+   });
+   unitHtml+="</div></div>";
+  });
+  if(!visibleTopics)return;
+  const pc=phaseCount(p);
+  out+=`<section class="phase-card" id="phase-${p.id}"><div class="phase-head"><div class="phase-icon">P${p.id}</div><div style="flex:1"><h3>Phase ${p.id}: ${esc(p.title)}</h3><p>${esc(p.subtitle)}</p></div><div class="phase-progress"><strong>${pc.done}/${pc.total}</strong><span>topics complete · ${Math.round(pc.done/pc.total*100)}%</span></div></div><div class="phase-body"><div class="track"><div class="fill" style="width:${Math.round(pc.done/pc.total*100)}%"></div></div>${unitHtml}</div></section>`;
+ });
+ $("syllabus").innerHTML=out||'<p class="muted">No topics match your search or filters.</p>';
+ $("expandBtn").textContent=expanded?"Collapse All":"Expand All";
+ updateStats();
+}
+function updateStats(){
+ const topics=allTopics(),total=topics.length,done=topics.filter(x=>isDone(x.id)).length,pct=Math.round(done/total*100);
+ $("percent").textContent=pct+"%";$("completed").textContent=`${done} / ${total}`;$("remaining").textContent=total-done;$("overallFill").style.width=pct+"%";
+ const next=topics.find(x=>!isDone(x.id));
+ $("currentPhase").textContent=next?`Phase ${next.p.id}`:"Complete!";
+ $("currentTitle").textContent=next?next.p.title:"All topics completed";
+}
+function fillCourse(){const map={batch:"batch",teacher:"teacher",startDate:"startDate",duration:"duration",nextFocus:"nextFocus",generalNotes:"generalNotes"};Object.entries(map).forEach(([k,id])=>$(id).value=data.course[k]||"")}
+function toast(s){const el=$("toast");el.textContent=s;el.style.display="block";clearTimeout(toast.timer);toast.timer=setTimeout(()=>el.style.display="none",2300)}
+$("syllabus").addEventListener("change",e=>{
+ if(e.target.dataset.topic){data.checks[e.target.dataset.topic]=e.target.checked;save();render();return}
+ if(e.target.dataset.unit){const [pstr,ustr]=e.target.dataset.unit.split("-"),p=phases.find(x=>x.id===Number(pstr)),u=p.units[Number(ustr)],v=e.target.checked;u.topics.forEach((t,ti)=>data.checks[`p${p.id}-u${Number(ustr)}-t${ti}`]=v);save();render();return}
+});
+$("syllabus").addEventListener("input",e=>{if(e.target.dataset.note){data.notes[e.target.dataset.note]=e.target.value;try{localStorage.setItem(KEY,JSON.stringify(data))}catch(err){}}});
+["search","phaseFilter","statusFilter"].forEach(id=>$(id).addEventListener(id==="search"?"input":"change",render));
+$("saveDetails").addEventListener("click",()=>{["batch","teacher","startDate","duration","nextFocus","generalNotes"].forEach(k=>data.course[k]=$(k).value);save();toast("Course details saved")});
+$("exportBtn").addEventListener("click",()=>{const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="react-topic-tracker-backup.json";a.click();URL.revokeObjectURL(url);toast("Backup exported")});
+$("importBtn").addEventListener("click",()=>$("importFile").click());
+$("importFile").addEventListener("change",async e=>{const f=e.target.files[0];if(!f)return;try{const v=JSON.parse(await f.text());if(!v||typeof v!=="object"||!v.checks)throw Error();data={...data,...v,course:{...data.course,...(v.course||{})}};save();fillCourse();render();toast("Backup imported")}catch(err){alert("This file is not a valid React topic tracker backup.")}e.target.value=""});
+$("printBtn").addEventListener("click",()=>window.print());
+$("resetBtn").addEventListener("click",()=>{if(confirm("Reset all topic checkboxes and teaching notes? Course details will remain.")){data.checks={};data.notes={};save();render();toast("Topic progress reset")}});
+$("expandBtn").addEventListener("click",()=>{expanded=!expanded;document.querySelectorAll(".unit").forEach(el=>el.classList.toggle("collapsed",!expanded));$("expandBtn").textContent=expanded?"Collapse All":"Expand All"});
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>{$("phaseFilter").value=b.dataset.goto;$("search").value="";$("statusFilter").value="all";render();document.getElementById("phase-"+b.dataset.goto)?.scrollIntoView({behavior:"smooth",block:"start"})}));
+load();fillCourse();render();
+</script>
+</body>
+</html>
