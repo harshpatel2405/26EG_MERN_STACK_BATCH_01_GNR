@@ -9,6 +9,10 @@ import MapDemo4 from "./components/map/MapDemo4";
 import MapDemo5 from "./components/map/MapDemo5";
 import MapDemo6 from "./components/map/MapDemo6";
 import CrDemo1 from "./components/Conditional Rendering/CrDemo1";
+import CrDemo2 from "./components/Conditional Rendering/CrDemo2";
+import CrDemo3 from "./components/Conditional Rendering/CrDemo3";
+import DemoNavbar from "./components/Conditional Rendering/DemoNavbar";
+import NotificationCR from "./components/Conditional Rendering/NotificationCR";
 
 
 const App = () => {
@@ -28,7 +32,12 @@ const App = () => {
     {/* <MapDemo5/> */}
     {/* <MapDemo6/> */}
 
-    <CrDemo1/>
+    {/* <CrDemo1/> */}
+    {/* <DemoNavbar/>
+    <CrDemo2/>
+    <CrDemo3/> */}
+
+    <NotificationCR/>
     </div>
   );
 };

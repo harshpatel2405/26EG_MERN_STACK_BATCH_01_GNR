@@ -1,0 +1,101 @@
+   /* Base styles */
+   body {
+       margin: 0;
+       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+       background-color: #f4f4f9;
+   }
+
+   /* Navbar Layout container using Flexbox */
+   .navbar {
+       display: flex;
+       justify-content: space-between;
+       align-items: center;
+       background-color: #1a1a24;
+       padding: 0.8rem 2rem;
+       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+   }
+
+   /* Branding logo styling */
+   .logo a {
+       font-size: 1.5rem;
+       font-weight: bold;
+       color: #ffffff;
+       text-decoration: none;
+   }
+
+   /* Nav links container */
+   .nav-container {
+       display: flex;
+       align-items: center;
+       gap: 1.5rem;
+   }
+
+   /* Unordered list styling reset */
+   .nav-links {
+       display: flex;
+       list-style: none;
+       margin: 0;
+       padding: 0;
+   }
+
+   /* Individual link spacing */
+   .nav-links li {
+       padding: 0 1rem;
+   }
+
+   /* Hyperlink typography & animations */
+   .nav-links a {
+       color: #e0e0e0;
+       text-decoration: none;
+       font-size: 1rem;
+       transition: color 0.3s ease;
+   }
+
+   /* Hover interaction effect */
+   .nav-links a:hover {
+       color: #4da6ff;
+   }
+
+   /* --- NOTIFICATION ICON & BADGE STYLES --- */
+
+   /* Parent container anchored for absolute badge positioning */
+   .notif-wrapper {
+       position: relative;
+       display: flex;
+       align-items: center;
+       cursor: pointer;
+   }
+
+   /* SVG Bell Styling */
+   .bell-icon {
+       width: 24px;
+       height: 24px;
+       fill: #e0e0e0;
+       transition: fill 0.3s ease;
+   }
+
+   .notif-wrapper:hover .bell-icon {
+       fill: #4da6ff;
+   }
+
+   /* Notification counter badge styling */
+   .notif-badge {
+       position: absolute;
+       top: -6px;
+       right: -6px;
+       background-color: #ff3b30;
+       /* Vibrant alert red */
+       color: white;
+       font-size: 0.7rem;
+       font-weight: bold;
+       border-radius: 50%;
+       min-width: 18px;
+       height: 18px;
+       display: flex;
+       justify-content: center;
+       align-items: center;
+       padding: 1px;
+       box-sizing: border-box;
+       border: 2px solid #1a1a24;
+       /* Prevents blending into the navbar */
+   }
