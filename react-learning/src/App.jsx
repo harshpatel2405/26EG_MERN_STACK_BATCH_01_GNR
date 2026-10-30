@@ -13,6 +13,11 @@ import CrDemo2 from "./components/Conditional Rendering/CrDemo2";
 import CrDemo3 from "./components/Conditional Rendering/CrDemo3";
 import DemoNavbar from "./components/Conditional Rendering/DemoNavbar";
 import NotificationCR from "./components/Conditional Rendering/NotificationCR";
+import { Route, Routes } from "react-router-dom";
+import RoutingDemo1 from "./components/Routing/RoutingDemo1";
+import Navbar from "./components/Routing/Navbar";
+import Home from "./components/Routing/Home";
+import Contact from "./components/Routing/Contact";
 
 
 const App = () => {
@@ -37,7 +42,14 @@ const App = () => {
     <CrDemo2/>
     <CrDemo3/> */}
 
-    <NotificationCR/>
+    {/* <NotificationCR/> */}
+
+      <Navbar/>
+    <Routes>
+      <Route path="/routingDemo1" element={<RoutingDemo1/>}></Route>
+      <Route path="/home" element={<Home/>}></Route>
+      <Route path="/contact" element={<Contact/>}></Route>
+    </Routes>
     </div>
   );
 };
