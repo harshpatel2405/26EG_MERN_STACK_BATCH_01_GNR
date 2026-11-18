@@ -18,6 +18,9 @@ import RoutingDemo1 from "./components/Routing/RoutingDemo1";
 import Navbar from "./components/Routing/Navbar";
 import Home from "./components/Routing/Home";
 import Contact from "./components/Routing/Contact";
+import StudentPage from "./components/Routing/StudentPage";
+import DyanamicRouting from "./components/Routing/DyanamicRouting";
+import MoviePage from "./components/Routing/MoviePage";
 
 
 const App = () => {
@@ -49,6 +52,9 @@ const App = () => {
       <Route path="/routingDemo1" element={<RoutingDemo1/>}></Route>
       <Route path="/home" element={<Home/>}></Route>
       <Route path="/contact" element={<Contact/>}></Route>
+      <Route path="/dynamic" element={<DyanamicRouting/>}/>
+      <Route path="/student/:id" element={<StudentPage/>} />
+      <Route path="/movie/:id" element={<MoviePage/>} />
     </Routes>
     </div>
   );
